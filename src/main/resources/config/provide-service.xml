@@ -13,23 +13,29 @@
 	<dubbo:registry protocol="zookeeper" address="${dubbo-register-address}" />
 
 	<!-- 声明需要暴露的服务接口 -->
-	
-<!-- 	测试分组聚合，当一个接口有多种实现时，可以用分组聚合 -->
+
+	<!-- 测试分组聚合，当一个接口有多种实现时，可以用分组聚合 -->
 	<dubbo:service interface="com.example.dubbo.service.HelloService"
-	ref="hello1ServiceImpl" group="gro_1"/>
-		<dubbo:service interface="com.example.dubbo.service.HelloService"
-	ref="hello2ServiceImpl" group="gro_2"/>
-		<dubbo:service interface="com.example.dubbo.service.HelloService"
-	ref="hello3ServiceImpl" group="gro_3"/>
-	<dubbo:reference id="helloService" interface="com.example.dubbo.service.HelloService" 
-		group="gro_1,gro_2" scope="remote">
-	<dubbo:method name="sayHello" merger="mylist"/>
+		ref="hello1ServiceImpl" group="gro_1" />
+	<dubbo:service interface="com.example.dubbo.service.HelloService"
+		ref="hello2ServiceImpl" group="gro_2" />
+	<dubbo:service interface="com.example.dubbo.service.HelloService"
+		ref="hello3ServiceImpl" group="gro_3" />
+	<dubbo:reference id="helloService"
+		interface="com.example.dubbo.service.HelloService" group="gro_1,gro_2"
+		scope="remote">
+		<dubbo:method name="sayHello" merger="mylist" />
 	</dubbo:reference>
 
-<!-- 	测试broadcast，测试结果，必须添加scope="remote"才能生效 -->
 	<dubbo:service interface="com.example.dubbo.service.ClusterService"
 		ref="clusterServiceImpl" />
+	<dubbo:service interface="com.example.dubbo.service.BroadcastService"
+		ref="broadcastServiceImpl" />		
+	<!-- 测试broadcast，测试结果，必须添加scope="remote"才能生效 -->
+	<dubbo:reference id="broadcastService"
+		interface="com.example.dubbo.service.BroadcastService" cluster="broadcast"
+		scope="remote" />
 	<dubbo:reference id="clusterService"
 		interface="com.example.dubbo.service.ClusterService" cluster="bm"
-		scope="remote" />
+		/>		
 </beans>
