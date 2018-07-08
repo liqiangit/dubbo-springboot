@@ -7,21 +7,32 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dubbo.service.ClusterService;
 import com.example.dubbo.service.HelloService;
 
 @RestController
 public class TestController {
-	
-@Lazy
-@Resource(name="helloService")
-HelloService helloService;
 
-@Value("${control}")
-private String control;
+	@Lazy
+	@Resource(name = "helloService")
+	HelloService helloService;
 
-	 @RequestMapping("/")
-	    String index() {
-//	        return "book name is:bookName and book author is: bookAuthor";
-		 return control+helloService.sayHello();
-	    }
+	@Lazy
+	@Resource(name = "clusterService")
+	ClusterService clusterService;
+
+	@Value("${control}")
+	private String control;
+
+	@RequestMapping("/merger")
+	String index() {
+		// return "book name is:bookName and book author is: bookAuthor";
+		return control + helloService.sayHello();
+	}
+
+	@RequestMapping("/cluster")
+	String cluster() {
+		// return "book name is:bookName and book author is: bookAuthor";
+		return control + clusterService.sayHello();
+	}
 }
