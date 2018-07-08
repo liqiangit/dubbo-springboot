@@ -37,5 +37,5 @@
 		scope="remote" />
 	<dubbo:reference id="clusterService"
 		interface="com.example.dubbo.service.ClusterService" cluster="bm"
-		/>		
+		scope="remote" />		
 </beans>
