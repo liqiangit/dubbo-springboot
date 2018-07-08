@@ -35,6 +35,7 @@
 	<dubbo:reference id="broadcastService"
 		interface="com.example.dubbo.service.BroadcastService" cluster="broadcast"
 		scope="remote" />
+	<!-- 测试自定义Cluster，测试结果，必须添加scope="remote"才能生效 -->		
 	<dubbo:reference id="clusterService"
 		interface="com.example.dubbo.service.ClusterService" cluster="bm"
 		scope="remote" />		

@@ -28,22 +28,28 @@ public class TestController {
 
 	@Value("${control}")
 	private String control;
-
+/**
+ * 测试分组聚合（接口多种实现）
+ * @return
+ */
 	@RequestMapping("/merger")
 	String index() {
-		// return "book name is:bookName and book author is: bookAuthor";
 		return control + helloService.sayHello();
 	}
-
+/**
+ * 测试广播合并
+ * @return
+ */
 	@RequestMapping("/cluster")
 	String cluster() {
-		// return "book name is:bookName and book author is: bookAuthor";
 		return control + clusterService.sayHello();
 	}
-	
+/**
+ * 测试广播	
+ * @return
+ */
 	@RequestMapping("/broadcast")
 	String broadcast() {
-		// return "book name is:bookName and book author is: bookAuthor";
 		return control + broadcastService.sayHello();
 	}	
 }
