@@ -1,3 +1,22 @@
+运行说明
+1 先启动zookeeper
+2 分两个workspace，设置不同的dubbo-port=20882，server.port=8082来测试分组聚合和cluster等功能
+3 启动DubboApplication
+4 用postman测试http://localhost:8082/ 然后观察两个项目里面的helloService是否都调用了
+测试总结 
+dubbo:reference	添加cluster="broadcast" scope="remote"两个属性才会调用broadcast，否则调用不了
+BroadcastCluster断点执行了
+ListMerger断点执行了
+	<dubbo:service interface="com.example.dubbo.service.HelloService"
+		ref="helloServiceImpl" />
+	<dubbo:reference id="helloService"
+		interface="com.example.dubbo.service.HelloService" cluster="broadcast"
+		scope="remote" />
 
+
+
+
+
+FAQ
 Caused by: org.apache.zookeeper.KeeperException$UnimplementedException: KeeperErrorCode = Unimplemented for /dubbo
 zookeeper.jar 跟zookeeper服务版本对应不上，修改curator版本
